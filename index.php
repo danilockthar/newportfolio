@@ -10,12 +10,16 @@
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="path/to/swiper.min.css">
 </head>
 <body>
+    <img id="loader" style="display:none;position:absolute;text-align:center;justify-self:center;" src="img/circles.svg">
+
     <div class="root">
         <?php include 'partes/navbar.php';?>
         <?php include 'partes/area.php';?>
     </div>
+    <script src="path/to/swiper.min.js"></script>
 </body>
 </html>
 <script>
@@ -28,6 +32,14 @@
         margin:0;
         padding:0;
         overflow-y:hidden;
+    }
+    #loader{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+        width:300px;
     }
     .root{
         display:grid;

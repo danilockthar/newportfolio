@@ -11,7 +11,8 @@
     $( document ).ready(function() {
         $("#menuspan a").on("click", function(){
             $("#loader").css("display", "block");
-            $(".area").css("background", "#aa0f17");
+            $("#loader").css("z-index", "100");
+            $(".root").css("opacity", "0.6");
             var datos = {};
             datos.nombre = $(this).attr("data-page");
             $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
@@ -19,7 +20,8 @@
                 console.log(contenido);
                $("#h1area").html(contenido.nombre);
                $("#loader").css("display", "none");
-                $(".area").css("background", "");
+               $(".root").css("opacity", "1");
+               $("#loader").css("z-index", "");
             });
         });
     });
@@ -59,6 +61,6 @@
     }
     #menuspan a:hover{
         background:#ef212c;
-        border-bottom:2px solid red;
+        border-bottom:2px solid gold;
     }
 </style>
