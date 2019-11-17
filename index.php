@@ -24,14 +24,14 @@
 </html>
 <script>
     $( document ).ready(function() {
-        
+       
     });
 </script>
 <style>
     *{
         margin:0;
         padding:0;
-        overflow-y:hidden;
+        overflow:hidden;
     }
     #loader{
         position: fixed;
@@ -44,5 +44,31 @@
     .root{
         display:grid;
         grid-template-columns:20% 80%;
+        background-image:url("img/balloon.jpg");
+        background-size:cover;
+    }
+    #proyecto-root{
+        display:grid;
+        grid-template-columns:1fr 1fr 1fr;
+
+    }
+    .proyecto-cajas{
+        text-align:center;
+        background:red;
+        width:100%;
+        height:200px;
+        display:grid;
+        align-items:center;
+        justify-content:center;
+    }
+   
+    .proyecto-cajas button{
+        display:block;
+        width:100px;
+        background:gold;
+        padding:8px;
+        color:black;
+        border:none;
+        cursor:pointer;
     }
 </style>
