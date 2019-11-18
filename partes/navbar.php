@@ -8,28 +8,80 @@
 </div>
 
 <script>
-    $( document ).ready(function() {
-        $("#logospan").on("click",function(){
-            $("#loader").css("display", "block");
-            $("#loader").css("z-index", "100");
-            $(".root").css("opacity", "0.6");
-            var datos = {};
-            datos.nombre = "intro";
-            $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
-                console.log(data);
-               $("#h1area").html(data.contenido);
-               $("#loader").css("display", "none");
-               $(".root").css("opacity", "1");
-               $("#loader").css("z-index", "");
-            });
+    
+        $(function(){
+	
+	var History = window.History;
+	
+	if (History.enabled) {
+		var page = get_url_value('page');
+		var path = page ? page : 'home';
+		// Load the page
+		load_page_content(path);
+	} else {
+		return false;
+	}
+
+	// Content update and back/forward button handler
+	History.Adapter.bind(window, 'statechange', function() {
+		var State = History.getState();	
+		// Do ajax
+		load_page_content(State.data.path);
+		// Log the history object to your browser's console
+		History.log(State);
+	});
+
+    // Navigation link handler
+    
+    $("#menuspan a").on("click", function(e){
+        e.preventDefault();
+        var datos = {};
+        datos.nombre = $(this).attr("data-page");
+        History.pushState({path: datos.nombre}, datos.nombre, './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
+    });
+     $("#logospan").on("click",function(){
+        var datos = {};
+        datos.nombre = "intro";
+        History.pushState({path: datos.nombre}, datos.nombre, './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
+  
+    }); 
+	
+	// ----------
+	function load_page_content(page) {
+        $("#loader").css("display", "block");
+        $("#loader").css("z-index", "100");
+        $(".root").css("opacity", "0.3");
+		$.post("https://broeders.com.ar/config/api.php",{"get_pages":page}, function(data){
+            var data = JSON.parse(data.contenido);
+            repartir_data(page, data);
+            $("#loader").css("display", "none");
+            $(".root").css("opacity", "1");
+            $("#loader").css("z-index", "");
         });
+	}
+	
+	function get_url_value(variable) {
+	   var query = window.location.search.substring(1);
+	   var vars = query.split("&");
+	   for (var i=0;i<vars.length;i++) {
+			   var pair = vars[i].split("=");
+			   if(pair[0] == variable){return pair[1];}
+	   }
+	   return(false);
+    }
+    // -------------------- // -------------------
+       
         
-       const repartir_data = (name, data) => {
+        const repartir_data = (name, data) => {
+           console.log(data);
+           if(data.proyecto){
+               name = "IDproyecto";
+           }
            var html = "";
            switch (name) {
                 case "proyectos":
                     for(val of data){
-                        html += `<div class="proyecto-cajas" data-page="${val.nombre}" style="background-image:url(${val.urlimage});background-size:cover;">
+                        html += `<div class="proyecto-cajas" data-page="${val.nombre}"  style="background-image:url(${val.urlimage});background-size:cover;">
                                 <button style="display:none">Ver Proyecto</button>
                             </div>
                         `;
@@ -43,49 +95,73 @@
                     });
 
                     $(".proyecto-cajas button").on("click", function(){
-                        var data = $(this).parent().attr("data-page");
                         var datos = {};
-                        datos.nombre = data;
-                        $("#loader").css("display", "block");
-                        $("#loader").css("z-index", "100");
-                        $(".root").css("opacity", "0.6");
-                        $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
-                        var data = JSON.parse(data.contenido);
-                        repartir_data("IDproyecto", data);
-                        $("#loader").css("display", "none");
-                        $(".root").css("opacity", "1");
-                        $("#loader").css("z-index", "");
-                        });
+                        datos.nombre = $(this).parent().attr("data-page");
+                        History.pushState({path: datos.nombre}, datos.nombre, './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
+
                     });
                 break;
                 case "IDproyecto":
-                    console.log(data);
                     html = `<div class="proyecto${data.nombre}">
+                                <i class="fas fa-window-close fa-4x close-button" style="position:absolute;right:0;margin-right:50px;margin-top:50px;color:white;cursor:pointer;"></i>
                                 <img src="${data.urlimage}" style="width:100%">
                                 <h2> ${data.contenido} </h2>
                             </div>
                         `;
                     $(".area").html(html);
+                    $(".close-button").on("click", function(){
+                        window.history.back();
+                        $("#loader").css("display", "block");
+                        $("#loader").css("z-index", "100");
+                        $(".root").css("opacity", "0.3");
+                        var datos = {};
+                        datos.nombre = "proyectos";
+                        $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
+                            var data = JSON.parse(data.contenido);
+                            repartir_data("proyectos", data);
+                            $("#loader").css("display", "none");
+                            $(".root").css("opacity", "1");
+                            $("#loader").css("z-index", "");
+                        });
+                    });
+                break;
+                case "contacto":
+                    html = `<div class="contacto">
+                            </div>
+                    `;
+                    $(".area").html(html);
+                break;
+                case "intro":
+                    html = `<div class="home">
+                            </div>
+                    `;
+                    $(".area").html(html);
                 break;
            }
             
-       }
-
-        $("#menuspan a").on("click", function(){
+       }/*
+       // MENU ONCLICK EVENTO //
+        $("#menuspan a").on("click", function(e){
+            e.prevenDefault();
             $("#loader").css("display", "block");
             $("#loader").css("z-index", "100");
             $(".root").css("opacity", "0.3");
             var datos = {};
             datos.nombre = $(this).attr("data-page");
             $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
+                history.pushState(datos.nombre, null, "index.php?s="+datos.nombre);
                var data = JSON.parse(data.contenido);
                repartir_data(datos.nombre, data);
                $("#loader").css("display", "none");
                $(".root").css("opacity", "1");
                $("#loader").css("z-index", "");
             });
-        });
-    });
+        }); */
+});
+        
+
+        
+  
 </script>
 <style>
     #logospan{

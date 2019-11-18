@@ -10,7 +10,8 @@
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="path/to/swiper.min.css">
+    <script src="https://kit.fontawesome.com/6936f4c3fb.js" crossorigin="anonymous"></script>
+    <script src="js/bundled/html4+html5/jquery.history.js"></script>
 </head>
 <body>
     <img id="loader" style="display:none;position:absolute;text-align:center;justify-self:center;" src="img/circles.svg">
@@ -19,12 +20,11 @@
         <?php include 'partes/navbar.php';?>
         <?php include 'partes/area.php';?>
     </div>
-    <script src="path/to/swiper.min.js"></script>
 </body>
 </html>
 <script>
     $( document ).ready(function() {
-       
+        
     });
 </script>
 <style>
