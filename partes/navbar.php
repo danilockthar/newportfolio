@@ -5,6 +5,11 @@
         <a href="#!" data-page="home"> ABOUT </a>
         <a href="#!" data-page="contacto"> CONTACTO </a>
     </span>
+    <span id="social">
+        <a href="https://www.facebook.com/Broeders-330124020993897/" target="blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+        <i class="fab fa-instagram fa-2x"></i>
+        <i class="fab fa-github-square fa-2x"></i>
+    </span>
 </div>
 
 <script>
@@ -50,11 +55,13 @@
 	function load_page_content(page) {
         $("#loader").css("display", "block");
         $("#loader").css("z-index", "100");
-        $(".root").css("opacity", "0.3");
+        $("html").css("background", "red");
+        $(".root").css("opacity", "0.4");
 		$.post("https://broeders.com.ar/config/api.php",{"get_pages":page}, function(data){
             var data = JSON.parse(data.contenido);
             repartir_data(page, data);
             $("#loader").css("display", "none");
+            $("html").css("background", "");
             $(".root").css("opacity", "1");
             $("#loader").css("z-index", "");
         });
@@ -88,6 +95,7 @@
                     }
                     $(".area").html(`<div id="proyecto-root">`+html+`</div>`);
                     $(".proyecto-cajas").on("mouseenter", function(){
+                       
                         $(this).find("button").css("display", "block");
                     });
                     $(".proyecto-cajas").on("mouseleave", function(){
@@ -176,13 +184,25 @@
     .navbar{
         display:grid;
         grid-template-columns:1fr;
-        grid-template-rows: 25% 75%;
-        grid-row-gap:80px;
+        grid-template-rows: 25% 50% 25%;
+        grid-row-gap:20px;
         text-align: center;
-        opacity:0.6;
+        background-color: rgba(0, 0, 0, 0.6);
         width:100%;
         height:100vh;
-        background:#1f1f1f;
+    }
+    #social{
+        display:grid;
+        grid-template-columns:1fr 1fr 1fr;
+        align-items:center;
+        justify-items:center;
+    }
+    #social i{
+        color:white;
+        font-size:25px;
+    }
+    #social i:hover{
+        color:gold;
     }
     #menuspan{
         display:grid;
@@ -190,17 +210,17 @@
         grid-row-gap:30px;
     }
     #menuspan a{
+        margin-top:50px;
         text-align:right;
         line-height:0.1;
         padding:20px;
-        background:blue;
         font-size:20px;
         text-decoration:none;
-        color: white;
-        font-family:'Roboto', 'sans-serif';
+        color: #ffb303;
+        font-weight:800;
+        font-family:'Muli', 'sans-serif';
     }
     #menuspan a:hover{
-        background:#ef212c;
-        border-bottom:2px solid gold;
+        color: white;
     }
 </style>
