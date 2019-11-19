@@ -30,7 +30,6 @@
 <script>
     $( document ).ready(function() {
         
-         
     });
 </script>
 <style>
@@ -67,7 +66,6 @@
         display:grid;
         align-items:center;
         justify-content:center;
-        background:red;
 
     }
     .proyecto-cajas:hover{

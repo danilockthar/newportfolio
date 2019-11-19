@@ -1,9 +1,9 @@
 <div class="navbar">
     <span id="logospan"> <img class="logotipo" src="img/brodcontornodos.png"> </span>
     <span id="menuspan">
-        <a href="#!" data-page="proyectos"> PROYECTOS </a>
-        <a href="#!" data-page="home"> ABOUT </a>
-        <a href="#!" data-page="contacto"> CONTACTO </a>
+        <a href="#!" title="Proyectos" data-page="proyectos"> PROYECTOS </a>
+        <a href="#!" title="Sobre mi" data-page="home"> ABOUT </a>
+        <a href="#!" title="Contacto" data-page="contacto"> CONTACTO </a>
     </span>
     <span id="social">
         <a href="https://www.facebook.com/Broeders-330124020993897/" target="blank"><i class="fab fa-facebook-square fa-2x"></i></a>
@@ -15,7 +15,6 @@
 <script>
     
         $(function(){
-	
 	var History = window.History;
 	
 	if (History.enabled) {
@@ -34,7 +33,10 @@
 		load_page_content(State.data.path);
 		// Log the history object to your browser's console
 		History.log(State);
-	});
+    });
+    String.prototype.capitalize = function() {
+        return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    };
 
     // Navigation link handler
     
@@ -42,23 +44,25 @@
         e.preventDefault();
         var datos = {};
         datos.nombre = $(this).attr("data-page");
-        History.pushState({path: datos.nombre}, datos.nombre, './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
+        History.pushState({path: datos.nombre}, datos.nombre.capitalize(), './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
     });
      $("#logospan").on("click",function(){
         var datos = {};
         datos.nombre = "intro";
-        History.pushState({path: datos.nombre}, datos.nombre, './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
+        History.pushState({path: datos.nombre}, datos.nombre.capitalize(), './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
   
     }); 
 	
-	// ----------
+    // ----------
+    
 	function load_page_content(page) {
         $("#loader").css("display", "block");
         $("#loader").css("z-index", "100");
-        $("html").css("background", "red");
+        $("html").css("background", "#BB000E");
         $(".root").css("opacity", "0.4");
 		$.post("https://broeders.com.ar/config/api.php",{"get_pages":page}, function(data){
             var data = JSON.parse(data.contenido);
+            
             repartir_data(page, data);
             $("#loader").css("display", "none");
             $("html").css("background", "");
@@ -80,7 +84,6 @@
        
         
         const repartir_data = (name, data) => {
-           console.log(data);
            if(data.proyecto){
                name = "IDproyecto";
            }
