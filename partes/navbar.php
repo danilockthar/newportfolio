@@ -54,20 +54,45 @@
     }); 
 	
     // ----------
-    
+    var startTime;
+    var elapsedTime;
 	function load_page_content(page) {
-        $("#loader").css("display", "block");
+        startTime = Date.now();
+
+        var interval = setInterval(function() {
+            elapsedTime = Date.now() - startTime;
+            
+        }, 100);
+        /*$("#loader").css("display", "block");
         $("#loader").css("z-index", "100");
         $("html").css("background", "#BB000E");
-        $(".root").css("opacity", "0.4");
+        $(".root").css("opacity", "0.4");*/
+        $("#loader").css("display", "block");
+        $("#loader").css("z-index", "100");
+        $(".work").css("height", "50vh");
+        $(".dowork").css("height", "50vh");
+        $(".dowork2").css("width", "50vw");
+        $(".dowork3").css("width", "50vw");
 		$.post("https://broeders.com.ar/config/api.php",{"get_pages":page}, function(data){
             var data = JSON.parse(data.contenido);
-            
+            clearInterval(interval);
+            console.log(elapsedTime);
             repartir_data(page, data);
-            $("#loader").css("display", "none");
+            setTimeout(function(){
+                $(".work").css("height", "00vh");
+                $(".dowork").css("height", "00vh");
+                $(".dowork2").css("width", "0vw");
+            $(".dowork3").css("width", "0vw");
+                $("#loader").css("display", "none");
+                $("#loader").css("z-index", "100");
+            },elapsedTime > 800 ? 200 : 500);
+           
+   
+            
+           /* $("#loader").css("display", "none");
             $("html").css("background", "");
             $(".root").css("opacity", "1");
-            $("#loader").css("z-index", "");
+            $("#loader").css("z-index", "");*/
         });
 	}
 	
@@ -122,18 +147,7 @@
                     $(".area").html(html);
                     $(".close-button").on("click", function(){
                         window.history.back();
-                        $("#loader").css("display", "block");
-                        $("#loader").css("z-index", "100");
-                        $(".root").css("opacity", "0.3");
-                        var datos = {};
-                        datos.nombre = "proyectos";
-                        $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
-                            var data = JSON.parse(data.contenido);
-                            repartir_data("proyectos", data);
-                            $("#loader").css("display", "none");
-                            $(".root").css("opacity", "1");
-                            $("#loader").css("z-index", "");
-                        });
+                        load_page_content("proyectos");
                     });
                 break;
                 case "contacto":

@@ -21,28 +21,6 @@
 </style>
 
 <script> 
-    $(document).ready(function(){
-        $(".proyecto-cajas").on("mouseenter", function(){
-            $(this).find("button").css("display", "block");
-        });
-        $(".proyecto-cajas").on("mouseleave", function(){
-            $(this).find("button").css("display", "none");
-        });
-
-        $(".proyecto-cajas button").on("click", function(){
-            var data = $(this).parent().attr("data-page");
-            var datos = {};
-            datos.nombre = data;
-            $("#loader").css("display", "block");
-            $("#loader").css("z-index", "100");
-            $(".root").css("opacity", "0.6");
-            $.post("https://broeders.com.ar/config/api.php",{"get_pages":datos}, function(data){
-               $("#h1area").html(data.contenido);
-               $("#loader").css("display", "none");
-               $(".root").css("opacity", "1");
-               $("#loader").css("z-index", "");
-            });
-        });
-    });
-
+   
+      
 </script>

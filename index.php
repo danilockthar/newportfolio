@@ -17,20 +17,22 @@
 <body>
     <img id="loader" style="display:none;position:absolute;text-align:center;justify-self:center;color:gold;" src="img/circles.svg">
 
-    
-  
+  <div class="rootwork">
+    <div class="work loaders">   </div>
+    <div class="dowork loaders"></div>
+    <div class="dowork2 loaders"></div>
+    <div class="dowork3 loaders"></div>
+</div>
     <div class="root">
         <?php include 'partes/navbar.php';?>
         <?php include 'partes/area.php';?>
     </div>
-    
+
 
 </body>
 </html>
 <script>
-    $( document ).ready(function() {
-        
-    });
+    
 </script>
 <style>
     *{
@@ -38,14 +40,65 @@
         padding:0;
         overflow:hidden;
     }
+    
+    .rootwork{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+    .loaders{
+        animation-name: "identifier";
+        animation-iteration-count: infinite;
+        animation-delay: 15s;
 
+    }
+    @keyframes identifier {
+    from{ transform: rotate(0deg) ;}
+        
+    to { transform: rotate(360deg); }
+    }
+    .work{
+        top:0;
+        position:fixed;
+        transition:0.7s;
+        width:100%;
+        height:0vh;
+        z-index:1;
+        background: #0c0c0c;
+    }
+    .dowork{
+        position:fixed;
+        transition:0.7s;
+        bottom:0;
+        background:#0c0c0c;
+        width: 100%;
+        height:0vh;
+        z-index:1;
+    }
+    .dowork2{
+        position:fixed;
+        transition:0.7s;
+        left:0;
+        background:#0c0c0c;
+        width: 0%;
+        height:100%;
+        z-index:1;
+    }
+    .dowork3{
+        position:fixed;
+        transition:0.7s;
+        right:0;
+        background:#0c0c0c;
+        width: 0%;
+        height:100%;
+        z-index:1;
+    }
     #loader{
         position: fixed;
         top: 50%;
         left: 50%;
         /* bring your own prefixes */
         transform: translate(-50%, -50%);
-        width:300px;
+        width:100px;
     }
     .root{
         display:grid;
