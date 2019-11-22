@@ -103,7 +103,7 @@
     .root{
         display:grid;
         grid-template-columns:20% 80%;
-        background-image:url("img/white.jpg");
+        background-image:url("img/leaves.jpg");
         background-size:cover;
     }
    

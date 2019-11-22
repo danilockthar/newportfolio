@@ -1,5 +1,5 @@
 <div class="area">
-    <h1 style="font-family:Roboto;font-weight:bold;"> DANI PORTFOLIO <h1>
+    
 </div>
 
 <style>
@@ -9,6 +9,11 @@
         height:100vh;
     }
     .area h1{
+        position:absolute;
+        top:50%;
+        left:33%;
+        margin:auto;
+        color:white;
         font-size:80px;
     }
     .minifooter{
