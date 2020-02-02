@@ -16,7 +16,7 @@
         <span data-text="CONTACTO" title="Contacto" data-page="contacto"> CONTACTO </span>
     </div>
     <div class="socialmedia">
-    
+
     </div>
 </div>
 <script>
@@ -26,9 +26,9 @@
 	
 	if (History.enabled) {
 		var page = get_url_value('page');
-		var path = page ? page : 'home';
-        if(path == 'home'){
-            console.log("home");
+		var path = page ? page : 'intro';
+        if(path == 'intro'){
+            console.log("intro");
         }else{
             load_page_content(path); 
         }
@@ -61,86 +61,43 @@
     });
      $("#logospan").on("click",function(){
         var datos = {};
-        datos.nombre = "home";
+        datos.nombre = "intro";
         History.pushState({path: datos.nombre}, datos.nombre.capitalize(), './?page=' + datos.nombre); // When we do this, History.Adapter will also execute its contents. 		
   
     }); 
 	var menushowed = false;
     $("#barmenu").on("click", function(){
-        var animation = anime.timeline({
-            });
         if(!menushowed){
             $("#bars2").css("transform", "translateX(-500px)");
             $("#bars1").css("transformOrigin", "top left");
             $("#bars1").css("transform", "rotate(40deg)");
             $("#bars3").css("transformOrigin", "bottom left");
             $("#bars3").css("transform", "rotate(-40deg)");
+            $(".hiddemenu").css("width", "40vw");
+            $(".navbar img").removeClass("showupimg");
+            $(".navbar img").addClass("showoffimg");
+            $(".hiddemenu img").removeClass("showoff");
+            $(".hiddemenu span").css("opacity", "0");
+            setTimeout(function(){
+                $(".hiddemenu img").addClass("showup05");
+                $(".navbar img").css("opacity", "0");
+                $(".navbar img").css("z-index", "-100");
+            }, 800);
+            $(".hiddemenu span").eq(3).removeClass("showoff");
+            $(".hiddemenu span").eq(3).addClass("showup");
+            setTimeout(function(){
+                $(".hiddemenu span").eq(2).removeClass("showoff");
+                $(".hiddemenu span").eq(2).addClass("showup");
+            }, 200);
+            setTimeout(function(){
+                $(".hiddemenu span").eq(1).removeClass("showoff");
+                $(".hiddemenu span").eq(1).addClass("showup");
+            }, 400);
+            setTimeout(function(){
+                $(".hiddemenu span").eq(0).removeClass("showoff");
+                $(".hiddemenu span").eq(0).addClass("showup");
+            }, 600);
             $(".menutextbars").css("opacity", "0");
-            
-            animation
-            .add({
-                targets: '.hiddemenu',
-                width: '40vw',
-                easing: 'easeInOutSine',
-                duration: 100
-            })
-            .add({
-                targets: '.hiddemenu span',
-                translateY: [-100, 0],
-                easing: 'easeOutQuart',
-                opacity: 1,
-                delay: anime.stagger(100, {start: 10}),
-                duration: 50
-            })
-            .add({
-                targets: '.navbar img',
-                translateY: 100,
-                easing: 'easeInOutQuad',
-                delay: 50,
-                duration: 50
-            })
-            .add({
-                targets: '.navbar img',
-                opacity: 0,
-                easing: 'easeInOutQuad',
-                delay: 200,
-                duration: 200
-            })
-            .add({
-                targets: '.hiddemenu img',
-                opacity: 1,
-                translateY: [-100, 0],
-                easing: 'easeOutQuad',
-                delay: 150,
-                duration: 100
-            })
-            
-            
-            
-            // $(".navbar img").removeClass("showupimg");
-            // $(".navbar img").addClass("showoffimg");
-            // $(".hiddemenu img").removeClass("showoff");
-            // $(".hiddemenu span").css("opacity", "0");
-            // setTimeout(function(){
-            //     $(".hiddemenu img").addClass("showup05");
-            //     $(".navbar img").css("opacity", "0");
-            //     $(".navbar img").css("z-index", "-100");
-            // }, 800);
-            // $(".hiddemenu span").eq(3).removeClass("showoff");
-            // $(".hiddemenu span").eq(3).addClass("showup");
-            // setTimeout(function(){
-            //     $(".hiddemenu span").eq(2).removeClass("showoff");
-            //     $(".hiddemenu span").eq(2).addClass("showup");
-            // }, 200);
-            // setTimeout(function(){
-            //     $(".hiddemenu span").eq(1).removeClass("showoff");
-            //     $(".hiddemenu span").eq(1).addClass("showup");
-            // }, 400);
-            // setTimeout(function(){
-            //     $(".hiddemenu span").eq(0).removeClass("showoff");
-            //     $(".hiddemenu span").eq(0).addClass("showup");
-            // }, 600);
-            // $(".menutextbars").css("opacity", "0");
             menushowed = true;
         }else{
             $("#bars2").css("transform", "translateX(0px)");
@@ -150,68 +107,32 @@
             $("#bars3").css("transform", "rotate(0deg)");
             $("#bars3").css("transformOrigin", "bottom left");
             $("#bars3").css("transform", "translateX(0px)");
-            animation
-            .add({
-                targets: '.hiddemenu span',
-                translateY: [0, -100],
-                easing: 'easeOutQuart',
-                opacity: 0,
-                delay: anime.stagger(100, {start: 50}),
-                duration: 100
-            })
-            .add({
-                targets: '.hiddemenu img',
-                opacity: 1,
-                translateY: [0, -100],
-                easing: 'easeOutQuart',
-                delay: 200,
-                duration: 200
-            })
-            .add({
-                targets: '.navbar img',
-                translateY: 0,
-                opacity: 1,
-                easing: 'easeInOutSine',
-                delay: 50,
-                duration: 50
-            })
-            // 1
-            .add({
-                targets: '.hiddemenu',
-                width: '0vw',
-                easing: 'easeInOutSine',
-                duration: 100
-            });
+            $(".hiddemenu span").eq(0).removeClass("showup");
+            $(".hiddemenu span").eq(0).addClass("showoff");
+            setTimeout(function(){
+                $(".hiddemenu span").eq(1).removeClass("showup");
+                $(".hiddemenu span").eq(1).addClass("showoff");
+            },200);
+            setTimeout(function(){
+                $(".hiddemenu span").eq(2).removeClass("showup");
+                $(".hiddemenu span").eq(2).addClass("showoff");
+            },400);
+            setTimeout(function(){
+                $(".hiddemenu span").eq(3).removeClass("showup");
+                $(".hiddemenu span").eq(3).addClass("showoff");
+            },600)
+            $(".hiddemenu img").removeClass("showup05");
+            $(".hiddemenu img").addClass("showoff");
+            $(".navbar img").removeClass("showoffimg");
+            setTimeout(function(){
+                $(".navbar img").css("z-index", "1");
+                $(".navbar img").addClass("showupimg");
+                $(".navbar img").css("opacity", "1");
+            }, 800);
             
-            
-            
-            
-            // $(".hiddemenu span").eq(0).removeClass("showup");
-            // $(".hiddemenu span").eq(0).addClass("showoff");
-            // setTimeout(function(){
-            //     $(".hiddemenu span").eq(1).removeClass("showup");
-            //     $(".hiddemenu span").eq(1).addClass("showoff");
-            // },200);
-            // setTimeout(function(){
-            //     $(".hiddemenu span").eq(2).removeClass("showup");
-            //     $(".hiddemenu span").eq(2).addClass("showoff");
-            // },400);
-            // setTimeout(function(){
-            //     $(".hiddemenu span").eq(3).removeClass("showup");
-            //     $(".hiddemenu span").eq(3).addClass("showoff");
-            // },600)
-            // $(".hiddemenu img").removeClass("showup05");
-            // $(".hiddemenu img").addClass("showoff");
-            // $(".navbar img").removeClass("showoffimg");
-            // setTimeout(function(){
-            //     $(".navbar img").css("z-index", "1");
-            //     $(".navbar img").addClass("showupimg");
-            //     $(".navbar img").css("opacity", "1");
-            // }, 800);
-            
-            // setTimeout(function(){
-            //     $(".hiddemenu").css("width", "0vw");
-            // }, 1400);
+            setTimeout(function(){
+                $(".hiddemenu").css("width", "0vw");
+            }, 1400);
             menushowed = false;
             $(".menutextbars").css("opacity", "1");
         }
@@ -239,51 +160,37 @@
             $("#loader").css("display", "block");
             $(".area").css("opacity", "0.5");
 		$.post("https://broeders.com.ar/config/api.php",{"get_pages":page}, function(data){
-		    if(page == "home" || page == "about" || page == "contacto"){
+		    console.log(data, "ladataman");
+		    if(page == "intro" || page == "about" || page == "contacto"){
 		        if(menushowed){
-                    var animation = anime.timeline({
-                        update: function(anim) {
-                            console.log(Math.round(anim.progress)+'%');
-                            if(Math.round(anim.progress) == 100){
-                                $(".area").html(data);
-                                $("#loader").css("display", "none");
-                                $(".area").css("opacity", "1");
-                            }
-                        }
-                    });
-                    animation
-                    .add({
-                        targets: '.hiddemenu span',
-                        translateY: [0, -100],
-                        easing: 'easeOutQuart',
-                        opacity: 0,
-                        delay: anime.stagger(100, {start: 50}),
-                        duration: 100
-                    })
-                    .add({
-                        targets: '.hiddemenu img',
-                        opacity: 1,
-                        translateY: [0, -100],
-                        easing: 'easeOutQuart',
-                        delay: 200,
-                        duration: 200
-                    })
-                    .add({
-                        targets: '.navbar img',
-                        translateY: 0,
-                        opacity: 1,
-                        easing: 'easeInOutSine',
-                        delay: 50,
-                        duration: 50
-                    })
-                    // 1
-                    .add({
-                        targets: '.hiddemenu',
-                        width: '0vw',
-                        easing: 'easeInOutSine',
-                        duration: 100
-                    });
-                    
+                    $(".hiddemenu span").eq(0).removeClass("showup");
+                    $(".hiddemenu span").eq(0).addClass("showoff");
+                    setTimeout(function(){
+                        $(".hiddemenu span").eq(1).removeClass("showup");
+                        $(".hiddemenu span").eq(1).addClass("showoff");
+                    },200);
+                    setTimeout(function(){
+                        $(".hiddemenu span").eq(2).removeClass("showup");
+                        $(".hiddemenu span").eq(2).addClass("showoff");
+                    },400);
+                    setTimeout(function(){
+                        $(".hiddemenu span").eq(3).removeClass("showup");
+                        $(".hiddemenu span").eq(3).addClass("showoff");
+                    },600)
+                    $(".hiddemenu img").removeClass("showup05");
+                    $(".hiddemenu img").addClass("showoff");
+                    $(".navbar img").removeClass("showoffimg");
+                    setTimeout(function(){
+                        $(".navbar img").css("z-index", "1");
+                        $(".navbar img").addClass("showupimg");
+                        $(".navbar img").css("opacity", "1");
+                    }, 800);
+                    setTimeout(function(){
+                        $(".hiddemenu").css("width", "0vw");
+                        $(".area").html(data);
+                        $("#loader").css("display", "none");
+                        $(".area").css("opacity", "1");
+                    }, 1400);
                     menushowed = false;
                     $(".menutextbars").css("opacity", "1");
                 }else{
@@ -294,48 +201,34 @@
 		    }else{
 		        var data = JSON.parse(data[0].contenido);
             if(menushowed){
-                var animation = anime.timeline({
-                    update: function(anim) {
-                            console.log(Math.round(anim.progress)+'%');
-                            if(Math.round(anim.progress) == 100){
-                                repartir_data(page, data);
-                                $("#loader").css("display", "none");
-                                $(".area").css("opacity", "1");
-                            }
-                        }
-                    });
-                    animation
-                    .add({
-                        targets: '.hiddemenu span',
-                        translateY: [0, -100],
-                        easing: 'easeOutQuart',
-                        opacity: 0,
-                        delay: anime.stagger(100, {start: 50}),
-                        duration: 100
-                    })
-                    .add({
-                        targets: '.hiddemenu img',
-                        opacity: 1,
-                        translateY: [0, -100],
-                        easing: 'easeOutQuart',
-                        delay: 200,
-                        duration: 200
-                    })
-                    .add({
-                        targets: '.navbar img',
-                        translateY: 0,
-                        opacity: 1,
-                        easing: 'easeInOutSine',
-                        delay: 50,
-                        duration: 50
-                    })
-                    // 1
-                    .add({
-                        targets: '.hiddemenu',
-                        width: '0vw',
-                        easing: 'easeInOutSine',
-                        duration: 100
-                    });
+                $(".hiddemenu span").eq(0).removeClass("showup");
+                $(".hiddemenu span").eq(0).addClass("showoff");
+                setTimeout(function(){
+                    $(".hiddemenu span").eq(1).removeClass("showup");
+                    $(".hiddemenu span").eq(1).addClass("showoff");
+                },200);
+                setTimeout(function(){
+                    $(".hiddemenu span").eq(2).removeClass("showup");
+                    $(".hiddemenu span").eq(2).addClass("showoff");
+                },400);
+                setTimeout(function(){
+                    $(".hiddemenu span").eq(3).removeClass("showup");
+                    $(".hiddemenu span").eq(3).addClass("showoff");
+                },600)
+                $(".hiddemenu img").removeClass("showup05");
+                $(".hiddemenu img").addClass("showoff");
+                $(".navbar img").removeClass("showoffimg");
+                setTimeout(function(){
+                    $(".navbar img").css("z-index", "1");
+                    $(".navbar img").addClass("showupimg");
+                    $(".navbar img").css("opacity", "1");
+                }, 800);
+                setTimeout(function(){
+                    $(".hiddemenu").css("width", "0vw");
+                    repartir_data(page, data);
+                    $("#loader").css("display", "none");
+                    $(".area").css("opacity", "1");
+                }, 1400);
                 menushowed = false;
                 $(".menutextbars").css("opacity", "1");
             }else{
@@ -475,9 +368,7 @@
         background:#4519bf;
         z-index:100;
     }
-    .hiddemenu span{
-        opacity:0;
-    }
+    
     .navbar{
         width:100%;
         display:grid;

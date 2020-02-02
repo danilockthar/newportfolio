@@ -1,12 +1,11 @@
 <div class="area">
-    
 </div>
 
 <style>
     .area{
         overflow-y:scroll;
         width:100%;
-        height:100vh;
+        background:#050505;
     }
     .area h1{
         position:absolute;
@@ -25,7 +24,3 @@
     }
 </style>
 
-<script> 
-   
-      
-</script>
