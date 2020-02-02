@@ -1,4 +1,4 @@
-<div class="navbar" style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;">
+<div class="navbar" style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;justify-items:center;">
     <img id="logospan" src="img/sk2.png" style="max-width:200px;justify-self:center;transition:0.3s;">
     <div id="menuspan">
         <span data-text="HOME" title="Sobre mi" data-page="home"> home - </span>
@@ -433,5 +433,7 @@
   
 </script>
 <style>
-
+    #menuspan span{
+        font-family: Open Sans, sans-serif;
+    }
 </style>
