@@ -15,10 +15,11 @@
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/6936f4c3fb.js" crossorigin="anonymous"></script>
     <script src="js/bundled/html4+html5/jquery.history.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/anime.min.js"></script>
 </head>
 <body>
-  <img src="img/oval.svg" id="loader" style="max-width:200px;">
+  <img src="img/new.svg" id="loader" style="max-width:200px;">
   <div class="rootwork">
     <div class="work" id="work2"></div>
     <div class="work" id="work3"></div>
@@ -35,9 +36,6 @@
     
 </script>
 <style>
-    .rootwork{
-
-    }
     .work{
         transition:0.4s;
         height:0vh;
