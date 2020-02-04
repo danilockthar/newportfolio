@@ -14,6 +14,7 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/6936f4c3fb.js" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
     <script src="js/bundled/html4+html5/jquery.history.js"></script>
     <script src="js/anime.min.js"></script>
 </head>
